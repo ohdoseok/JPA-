@@ -1,18 +1,20 @@
 package com.example.jpa.bookmanager.domain;
 
 import lombok.*;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
+
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Data
-@Entity
 @Builder
+@Entity
 public class Users {
 
     @Id
@@ -21,9 +23,11 @@ public class Users {
 
     @NonNull
     private String name;
+
     @NonNull
     private String email;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
 }
