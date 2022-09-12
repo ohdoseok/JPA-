@@ -3,10 +3,9 @@ package com.example.jpa.bookmanager.domain;
 import lombok.*;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @NoArgsConstructor
@@ -30,4 +29,6 @@ public class Users {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Address> address;
 }
