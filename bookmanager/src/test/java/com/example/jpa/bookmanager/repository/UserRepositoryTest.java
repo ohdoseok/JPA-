@@ -50,6 +50,7 @@ class UserRepositoryTest {
 
 //        Optional<Users> users = userRepository.findById(1L);
 //        Users users = userRepository.findById(1L).orElse(null); // 1이 id 로 없으면 null
+//        Users users = userRepository.findById(1L).orElseThrow(RuntimeException::new);
 
 
 
@@ -70,12 +71,12 @@ class UserRepositoryTest {
 //        userRepository.deleteAllInBatch(userRepository.findAllById(Lists.newArrayList(1L,3L)));
 //        userRepository.findAll().forEach(System.out::println);
 
-//        Page<Users> users = userRepository.findAll(PageRequest.of(1,3));//현재 element는 5개 0번째페이지에 3개 1번째 페이지에 2개 들어감
+//        Page<Users> users = userRepository.findAll(PageRequest.of(0,3));//현재 element는 5개 0번째페이지에 3개 1번째 페이지에 2개 들어감
 //
 //        System.out.println("Page : "+users);
 //        System.out.println("totalElements : "+users.getTotalElements());
 //        System.out.println("totalPages : "+users.getTotalPages());
-//        System.out.println("numberOfElements : "+users.getNumberOfElements());
+//        System.out.println("numberOfElements : "+users.getNumberOfElements()); //현재 페이지의 element수
 //        System.out.println("sort : "+users.getSort());
 //        System.out.println("size : "+users.getSize());
 //
@@ -94,12 +95,12 @@ class UserRepositoryTest {
 //        Example<Users> example = Example.of(users,matcher);
 //
 //        userRepository.findAll(example).forEach(System.out::println);
-        userRepository.save(new Users("david","david@gmail.com"));
-
-        Users users = userRepository.findById(1L).orElseThrow(RuntimeException::new);
-        users.setEmail("martin-update@gmail.com");
-
-        userRepository.save(users);
+//        userRepository.save(new Users("david","david@gmail.com"));
+//
+//        Users users = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+//        users.setEmail("martin-update@gmail.com");
+//
+//        userRepository.save(users);
     }
 
     @Test
@@ -119,9 +120,17 @@ class UserRepositoryTest {
 //        System.out.println(userRepository.findByIdIsNotNull());
 //        System.out.println(userRepository.findByAddressIsNotEmpty());
 //        System.out.println(userRepository.findByNameIn(Lists.newArrayList("martin","denis")));
-        System.out.println(userRepository.findByNameStartingWith("mar"));
-        System.out.println(userRepository.findByNameEndingWith("tin"));
-        System.out.println(userRepository.findByNameContains("ar"));
-        System.out.println(userRepository.findByNameLike("%art%"));
+//        System.out.println(userRepository.findByNameStartingWith("mar"));
+//        System.out.println(userRepository.findByNameEndingWith("tin"));
+//        System.out.println(userRepository.findByNameContains("ar"));
+//        System.out.println(userRepository.findByNameLike("%art%"));
+
     }
+    @Test
+    void pagingAndSortingTest(){
+        System.out.println(userRepository.findTop1ByNameOrderByIdDesc("martin"));
+        System.out.println(userRepository.findFirstByNameOrderByIdDescEmailAsc("martin"));
+        System.out.println(userRepository.findFirstByName("martin",Sort.by(Sort.Order.desc("id"), Sort.Order.asc("email"))));
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.example.jpa.bookmanager.repository;
 
 import com.example.jpa.bookmanager.domain.Users;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;
@@ -40,5 +41,11 @@ public interface UserRepository extends JpaRepository<Users, Long> {//처음값�
     List<Users> findUserByNameIs(String name);
     List<Users> findUserByName(String name);
     List<Users> findUserByNameEquals(String name);
+
+    List<Users> findTop1ByNameOrderByIdDesc(String name);
+    List<Users> findTop1ByNameOrderByIdAsc(String name);
+    List<Users> findFirstByNameOrderByIdDescEmailAsc(String name);
+
+    List<Users> findFirstByName(String name, Sort sort);
 
 }
