@@ -1,6 +1,8 @@
 package com.example.jpa.bookmanager.repository;
 
 import com.example.jpa.bookmanager.domain.Users;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -47,5 +49,7 @@ public interface UserRepository extends JpaRepository<Users, Long> {//처음값�
     List<Users> findFirstByNameOrderByIdDescEmailAsc(String name);
 
     List<Users> findFirstByName(String name, Sort sort);
+
+    Page<Users> findByName(String name, Pageable pageable);
 
 }

@@ -128,9 +128,10 @@ class UserRepositoryTest {
     }
     @Test
     void pagingAndSortingTest(){
-        System.out.println(userRepository.findTop1ByNameOrderByIdDesc("martin"));
-        System.out.println(userRepository.findFirstByNameOrderByIdDescEmailAsc("martin"));
-        System.out.println(userRepository.findFirstByName("martin",Sort.by(Sort.Order.desc("id"), Sort.Order.asc("email"))));
+//        System.out.println(userRepository.findTop1ByNameOrderByIdDesc("martin"));
+//        System.out.println(userRepository.findFirstByNameOrderByIdDescEmailAsc("martin"));
+//        System.out.println(userRepository.findFirstByName("martin",Sort.by(Sort.Order.desc("id"), Sort.Order.asc("email"))));
+        System.out.println(userRepository.findByName("martin",PageRequest.of(0,1,Sort.by(Sort.Order.desc("id")))).getContent());
     }
 
 }
